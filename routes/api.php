@@ -35,6 +35,8 @@ $api->version('v1', [
         'limit' => config('api.rate_limits.access.limit'),
         'expires' => config('api.rate_limits.access.expires'),
     ], function($api) {
+        //图片验证码
+        $api->get('/captchas','CaptchasController@store');
 
     });
 });
