@@ -12,7 +12,10 @@ class CaptchasController extends Controller
     {
         $key = 'captcha-'.Str::random(15);
         $captchaBuilder->setDistortion(false);
-        $captchaBuilder->setPhrase('1234567890');
+        $captchaBuilder->setMaxFrontLines(0);
+        $captchaBuilder->setInterpolation(false);
+
+
         $captcha = $captchaBuilder->build();
         $expiredAt = now()->addMinutes(2);
         \Cache::put($key, ['code' => $captcha->getPhrase()], $expiredAt);
