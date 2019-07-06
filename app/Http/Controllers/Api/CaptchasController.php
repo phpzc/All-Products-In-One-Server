@@ -11,7 +11,8 @@ class CaptchasController extends Controller
     public function store(CaptchaBuilder $captchaBuilder)
     {
         $key = 'captcha-'.Str::random(15);
-
+        $captchaBuilder->setDistortion(false);
+        $captchaBuilder->setPhrase('1234567890');
         $captcha = $captchaBuilder->build();
         $expiredAt = now()->addMinutes(2);
         \Cache::put($key, ['code' => $captcha->getPhrase()], $expiredAt);
