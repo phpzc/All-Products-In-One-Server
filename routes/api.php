@@ -40,3 +40,7 @@ $api->version('v1', [
 
     });
 });
+
+header('Access-Control-Allow-Origin:*');
+header('Access-Control-Allow-Methods:OPTIONS,GET,POST,DELETE,PUT'); // 允许option，get，post请求
+header('Access-Control-Allow-Headers:x-requested-with');
