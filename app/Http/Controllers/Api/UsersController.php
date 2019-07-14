@@ -40,7 +40,7 @@ class UsersController extends Controller
     {
         $name = $request->input('name');
 
-        $user = User::query()->where(['name'=>$name])->find();
+        $user = User::query()->where(['name'=>$name])->first();
 
         if(!$user){
             return $this->errorResponse('用户不存在');
