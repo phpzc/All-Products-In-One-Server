@@ -17,7 +17,11 @@ $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', [
     'namespace' => 'App\Http\Controllers\Api',
-    'middle' =>'serializer:array',
+    'middle' =>[
+        'serializer:array', // 优化数据返回格式  清理多余的data键名 减少数据层级
+        'bindings',//让dinggo api 支持路由上的 模型绑定
+
+    ],
 ], function($api) {
 
     //节流处理  登录相关
@@ -26,6 +30,13 @@ $api->version('v1', [
         'limit' => config('api.rate_limits.sign.limit'),
         'expires' => config('api.rate_limits.sign.expires'),
     ], function($api) {
+
+        // 用户注册
+        $api->post('users', 'UsersController@store')
+            ->name('api.users.store');
+        $api->post('users/login','UsersController@login')
+            ->name('api.users.login');
+
 
     });
 
