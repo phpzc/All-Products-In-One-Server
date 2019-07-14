@@ -17,7 +17,7 @@ $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', [
     'namespace' => 'App\Http\Controllers\Api',
-    'middle' =>[
+    'middleware' =>[
         'serializer:array', // 优化数据返回格式  清理多余的data键名 减少数据层级
         'bindings',//让dinggo api 支持路由上的 模型绑定
 
