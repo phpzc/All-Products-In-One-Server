@@ -49,6 +49,21 @@ $api->version('v1', [
         //图片验证码
         $api->get('/captchas','CaptchasController@store');
 
+
+
+        //需要授权登录的
+        $api->group([
+            'middleware' => 'api.auth',
+        ],function($api){
+
+            //添加服务器
+            $api->post('servers','ServersController@store');
+
+            //添加产品
+            $api->post('products','ProductsController@store');
+
+        });
+
     });
 });
 
