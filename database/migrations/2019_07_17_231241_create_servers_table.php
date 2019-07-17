@@ -15,6 +15,7 @@ class CreateServersTable extends Migration
     {
         Schema::create('servers', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id')->comment('创建者id');
             $table->string('ip')->comment('服务器IP');
             $table->smallInteger('memory')->comment('内存 单位G');
             $table->smallInteger('cpu')->comment('cpu数量 单位个');
