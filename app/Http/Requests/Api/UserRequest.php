@@ -21,6 +21,7 @@ class UserRequest extends FormRequest
         return [
             'captcha_key' => '验证码 key',
             'captcha_code' => '验证码',
+            'name' => '用户名',
         ];
     }
 }
