@@ -62,6 +62,12 @@ $api->version('v1', [
             //添加产品
             $api->post('products','ProductsController@store');
 
+
+            //获取用户信息
+            $api->post('users/me','UsersController@me');
+            //修改邮箱
+            $api->post('users/email','UsersController@email');
+
         });
 
     });

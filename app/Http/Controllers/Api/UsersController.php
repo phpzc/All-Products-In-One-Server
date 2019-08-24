@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\Api\UserEmailRequest;
 use App\Http\Requests\Api\UserLoginRequest;
 use App\Transformers\UserTransformer;
 use Illuminate\Http\Request;
@@ -54,6 +55,46 @@ class UsersController extends Controller
         }
 
     }
+
+
+    /**
+     * 返回当前用户最新信息
+     */
+    public function me()
+    {
+        $user = $this->user();
+
+        return $this->response->item($user, new UserTransformer());
+    }
+
+    /**
+     * 修改邮箱
+     * @param UserEmailRequest $request
+     */
+    public function email(UserEmailRequest $request)
+    {
+        $user = $this->user();
+
+        $email = $request->email;
+
+        $user->email = $email;
+        $user->save();
+
+        return $this->response->item($user, new UserTransformer());
+    }
+
+    /**
+     * 修改密码
+     */
+    public function update_password()
+    {
+
+    }
+
+    /**
+     * 修改头像
+     */
+
 
 
     /**
