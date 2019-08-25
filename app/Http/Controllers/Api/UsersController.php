@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\UserEmailRequest;
 use App\Http\Requests\Api\UserLoginRequest;
+use App\Http\Requests\Api\UserPasswordRequest;
 use App\Transformers\UserTransformer;
 use Illuminate\Http\Request;
 use App\Http\Requests\Api\UserRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -85,15 +87,32 @@ class UsersController extends Controller
 
     /**
      * 修改密码
+     * @param UserPasswordRequest $request
      */
-    public function update_password()
+    public function update_password(UserPasswordRequest $request)
     {
+        $user = $this->user();
+
+        if( Hash::check($request->old_password, $user->password)) {
+
+            $user->password = bcrypt($request->password);
+            $user->save();
+
+            return $this->response->noContent();
+        }else{
+            return $this->errorResponse('旧密码不正确',422);
+        }
+
 
     }
 
     /**
      * 修改头像
      */
+    public function avatar()
+    {
+
+    }
 
 
 

@@ -67,7 +67,8 @@ $api->version('v1', [
             $api->post('users/me','UsersController@me');
             //修改邮箱
             $api->post('users/email','UsersController@email');
-
+            //修改密码
+            $api->post('users/password','UsersController@update_password');
         });
 
     });
